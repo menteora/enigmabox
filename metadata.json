@@ -1,0 +1,5 @@
+{
+  "name": "EnigmaBox",
+  "description": "A responsive React recreation of the Enigma Box landing page featuring a beige aesthetic, modular architecture, and dark mode support.",
+  "requestFramePermissions": []
+}
