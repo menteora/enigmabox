@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Instagram, Facebook, Mail } from 'lucide-react';
+import { FOOTER_TEXT, NAV_TEXT } from '../constants';
 
 export const Footer: React.FC = () => {
   return (
@@ -9,10 +10,10 @@ export const Footer: React.FC = () => {
         <div className="col-span-1 md:col-span-2">
           <div className="flex items-center gap-2 mb-6">
             <Box className="w-6 h-6" />
-            <span className="font-serif text-xl font-bold">Enigma Box</span>
+            <span className="font-serif text-xl font-bold">{NAV_TEXT.logo}</span>
           </div>
           <p className="opacity-60 max-w-sm mb-8 font-light">
-            Regala un'emozione che dura per sempre. Il modo più originale per dire ciò che provi.
+            {FOOTER_TEXT.brandDesc}
           </p>
           <div className="flex gap-4 opacity-60">
             <Instagram className="w-5 h-5 hover:opacity-100 hover:text-white cursor-pointer transition-all" />
@@ -22,27 +23,30 @@ export const Footer: React.FC = () => {
         </div>
 
         <div>
-          <h4 className="font-serif text-lg mb-6">Link Utili</h4>
+          <h4 className="font-serif text-lg mb-6">{FOOTER_TEXT.columns.useful.title}</h4>
           <ul className="space-y-4 opacity-60 font-light">
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Chi siamo</a></li>
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Contatti</a></li>
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Spedizioni</a></li>
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Resi</a></li>
+            {FOOTER_TEXT.columns.useful.links.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} className="hover:opacity-100 transition-opacity">{link.label}</a>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="font-serif text-lg mb-6">Legale</h4>
+          <h4 className="font-serif text-lg mb-6">{FOOTER_TEXT.columns.legal.title}</h4>
           <ul className="space-y-4 opacity-60 font-light">
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Privacy Policy</a></li>
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Cookie Policy</a></li>
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Termini e Condizioni</a></li>
+            {FOOTER_TEXT.columns.legal.links.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} className="hover:opacity-100 transition-opacity">{link.label}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
       
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 text-center opacity-40 text-sm">
-        © {new Date().getFullYear()} Enigma Box. Tutti i diritti riservati.
+        {FOOTER_TEXT.copyright}
       </div>
     </footer>
   );

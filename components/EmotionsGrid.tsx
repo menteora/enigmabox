@@ -1,14 +1,14 @@
 import React from 'react';
-import { EMOTIONS } from '../constants';
+import { EMOTIONS, EMOTIONS_TEXT } from '../constants';
 
 export const EmotionsGrid: React.FC = () => {
   return (
     <section className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl mb-4">Scegli la tua emozione</h2>
+          <h2 className="font-serif text-4xl md:text-5xl mb-4">{EMOTIONS_TEXT.title}</h2>
           <p className="opacity-60 max-w-xl mx-auto text-lg">
-            Ogni box è pensata per un momento specifico della vita. Quale storia vuoi raccontare oggi?
+            {EMOTIONS_TEXT.subtitle}
           </p>
         </div>
 

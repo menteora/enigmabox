@@ -1,5 +1,5 @@
 import React from 'react';
-import { STEPS } from '../constants';
+import { STEPS, HOW_IT_WORKS_TEXT } from '../constants';
 
 export const HowItWorks: React.FC = () => {
   return (
@@ -8,9 +8,9 @@ export const HowItWorks: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           
           <div>
-            <h2 className="font-serif text-4xl md:text-5xl mb-6">Come funziona la magia</h2>
+            <h2 className="font-serif text-4xl md:text-5xl mb-6">{HOW_IT_WORKS_TEXT.sectionTitle}</h2>
             <p className="opacity-60 text-lg mb-12 leading-relaxed">
-              Abbiamo reso semplice creare un momento indimenticabile. In pochi passi, trasformerai un semplice pensiero in un'esperienza tangibile e misteriosa.
+              {HOW_IT_WORKS_TEXT.sectionDesc}
             </p>
 
             <div className="space-y-12">
@@ -38,7 +38,7 @@ export const HowItWorks: React.FC = () => {
 
           <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-stone-100 dark:bg-zinc-800">
              <div className="absolute inset-0 flex items-center justify-center bg-stone-200 dark:bg-zinc-800">
-                <span className="opacity-30 font-serif text-2xl">Video Tutorial</span>
+                <span className="opacity-30 font-serif text-2xl">{HOW_IT_WORKS_TEXT.videoPlaceholder}</span>
              </div>
           </div>
 
