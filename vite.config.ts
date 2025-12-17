@@ -18,7 +18,7 @@ function htmlBuildPlugin(): Plugin {
         ''
       );
 
-      // Rimuove l'importmap (non serve nella build bundle)
+      // Rimuove l'importmap (non serve nella build bundle perché Vite risolve i moduli locali)
       html = html.replace(
         /<script\s+type="importmap">[\s\S]*?<\/script>\s*/g,
         ''
@@ -32,4 +32,9 @@ function htmlBuildPlugin(): Plugin {
 export default defineConfig({
   base: '/enigmabox/',
   plugins: [react(), htmlBuildPlugin()],
+  build: {
+    // Importante per react-snap: compila features moderne (come optional chaining ?.)
+    // in sintassi compatibile con il browser headless usato per il pre-rendering
+    target: 'es2015',
+  }
 });
