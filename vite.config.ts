@@ -11,7 +11,8 @@ function htmlBuildPlugin(): Plugin {
     transformIndexHtml(html) {
       return html
         .replace(/<script type="importmap">[\s\S]*?<\/script>/, '')
-        .replace(/<script src="https:\/\/cdn\.tailwindcss\.com"><\/script>/, '');
+        .replace(/<script src="https:\/\/cdn\.tailwindcss\.com"><\/script>/, '')
+        .replace(/<script>\s*tailwind\.config\s*=\s*\{[\s\S]*?\}\s*<\/script>\s*/g, '');
     },
   };
 }
