@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface ThemeContextType {
@@ -11,28 +12,28 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isDark, setIsDark] = useState<boolean>(false);
 
   useEffect(() => {
-    // Check local storage or system preference
+    if (typeof window === 'undefined') return;
+    
     const storedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
       setIsDark(true);
       document.documentElement.classList.add('dark');
-    } else {
-      setIsDark(false);
-      document.documentElement.classList.remove('dark');
     }
   }, []);
 
   const toggleTheme = () => {
     setIsDark((prev) => {
       const newTheme = !prev;
-      if (newTheme) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
+      if (typeof window !== 'undefined') {
+        if (newTheme) {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
       }
       return newTheme;
     });

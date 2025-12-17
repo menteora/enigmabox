@@ -17,13 +17,14 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-router-dom": "^7.1.5",
+    "vike": "^0.4.170",
+    "vike-react": "^0.5.0",
     "lucide-react": "^0.446.0",
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.0.1",
@@ -37,7 +38,6 @@
     "@tailwindcss/vite": "^4.0.0",
     "vite": "^5.4.6",
     "vite-plugin-dts": "^4.2.1",
-    "vite-plugin-ssg-prerender": "^1.0.2",
     "@types/node": "^22.5.5"
   }
 }
