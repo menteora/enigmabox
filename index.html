@@ -5,6 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enigma Box - Regala un'emozione</title>
+    
+    <!-- Tailwind CSS for Dev/Preview (Stripped on Build) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -12,16 +14,8 @@
         theme: {
           extend: {
             colors: {
-              cream: {
-                50: '#fffff8',
-                100: '#f9f7f2', // Main bg
-                200: '#efeadd',
-                300: '#e0d8c0',
-              },
-              ink: {
-                900: '#1a1a1a', // Main text
-                800: '#2d2d2d',
-              }
+              cream: { 50: '#fffff8', 100: '#f9f7f2', 200: '#efeadd', 300: '#e0d8c0' },
+              ink: { 800: '#2d2d2d', 900: '#1a1a1a' }
             },
             fontFamily: {
               serif: ['Times New Roman', 'serif'],
@@ -31,22 +25,25 @@
         }
       }
     </script>
-  <script type="importmap">
+
+    <!-- Importmap for Dev/Preview (Stripped on Build) -->
+    <script type="importmap">
 {
   "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@0.446.0",
+    "tailwind-merge": "https://esm.sh/tailwind-merge@2.5.2",
+    "clsx": "https://esm.sh/clsx@2.1.1",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
-    "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0",
-    "clsx": "https://esm.sh/clsx@^2.1.1",
     "vite": "https://esm.sh/vite@^7.3.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "@tailwindcss/vite": "https://esm.sh/@tailwindcss/vite@^4.1.18",
+    "react": "https://esm.sh/react@^19.2.3"
   }
 }
 </script>
-</head>
-  <body class="bg-[#f9f7f2] dark:bg-zinc-950 text-[#1a1a1a] dark:text-gray-100 transition-colors duration-300">
+  </head>
+  <body class="bg-cream-100 dark:bg-zinc-950 text-ink-900 dark:text-gray-100 transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

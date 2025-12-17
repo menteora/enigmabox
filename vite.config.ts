@@ -1,40 +1,28 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
+// Plugin to remove CDN scripts and importmaps during build
+// This prevents "Double React" errors in production while allowing quick previews in cloud editors
 function htmlBuildPlugin(): Plugin {
   return {
     name: 'html-transform',
-    apply: 'build', // ✅ solo durante vite build
+    apply: 'build',
     transformIndexHtml(html) {
-      // Rimuove lo script CDN di Tailwind
-      html = html.replace(
-        /<script\s+src="https:\/\/cdn\.tailwindcss\.com"><\/script>\s*/g,
-        ''
-      );
-
-      // Rimuove la configurazione inline di Tailwind
-      html = html.replace(
-        /<script>\s*tailwind\.config\s*=\s*\{[\s\S]*?\}\s*<\/script>\s*/g,
-        ''
-      );
-
-      // Rimuove l'importmap (non serve nella build bundle perché Vite risolve i moduli locali)
-      html = html.replace(
-        /<script\s+type="importmap">[\s\S]*?<\/script>\s*/g,
-        ''
-      );
-
-      return html;
+      return html
+        .replace(/<script type="importmap">[\s\S]*?<\/script>/, '')
+        .replace(/<script src="https:\/\/cdn\.tailwindcss\.com"><\/script>/, '');
     },
   };
 }
 
 export default defineConfig({
-  base: '/enigmabox/',
-  plugins: [react(), htmlBuildPlugin()],
+  plugins: [
+    react(), 
+    tailwindcss(),
+    htmlBuildPlugin()
+  ],
   build: {
-    // Importante per react-snap: compila features moderne (come optional chaining ?.)
-    // in sintassi compatibile con il browser headless usato per il pre-rendering
     target: 'es2015',
   }
 });

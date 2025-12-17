@@ -1,3 +1,44 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-serif: 'Times New Roman', serif;
+  --font-sans: 'Helvetica', 'Arial', sans-serif;
+
+  /* Colors */
+  --color-cream-50: #fffff8;
+  --color-cream-100: #f9f7f2;
+  --color-cream-200: #efeadd;
+  --color-cream-300: #e0d8c0;
+
+  --color-ink-800: #2d2d2d;
+  --color-ink-900: #1a1a1a;
+}
+
+/* 
+  Force Dark Mode 'class' strategy.
+  By default v4 uses system preference. This overrides it to check for the .dark class.
+*/
+@variant dark (&:where(.dark, .dark *));
+
+/* Global Keyframes moved to CSS for cleaner v4 handling */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
