@@ -1,4 +1,4 @@
 // +config.js
 export default {
-  baseUrl: '/enigmabox/'
+  base: '/enigmabox/'
 }
