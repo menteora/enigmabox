@@ -17,3 +17,13 @@ export interface NavLink {
   label: string;
   href: string;
 }
+
+export interface Product {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+  shortDescription: string;
+  imageColor: string; // Colore placeholder per l'immagine
+  features: string[];
+}

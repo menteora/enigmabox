@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 // Plugin to remove CDN scripts and importmaps during build
-// This prevents "Double React" errors in production while allowing quick previews in cloud editors
+// This ensures the production build uses the bundled dependencies (react, react-router, etc.)
 function htmlBuildPlugin(): Plugin {
   return {
     name: 'html-transform',
@@ -18,7 +18,7 @@ function htmlBuildPlugin(): Plugin {
 }
 
 export default defineConfig({
-  base:'/enigmabox/',
+  base: 'enigmabox/', // Percorsi relativi per supportare HashRouter e ambienti di preview dinamici
   plugins: [
     react(), 
     tailwindcss(),
@@ -26,5 +26,7 @@ export default defineConfig({
   ],
   build: {
     target: 'es2015',
+    outDir: 'dist',
+    emptyOutDir: true,
   }
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from './ui/Button';
 import { ArrowRight } from 'lucide-react';
 import { HERO_TEXT } from '../constants';
@@ -23,13 +24,17 @@ export const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up delay-300">
-          <Button size="lg" className="group">
-            {HERO_TEXT.ctaPrimary}
-            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-          </Button>
-          <Button size="lg" variant="outline">
-            {HERO_TEXT.ctaSecondary}
-          </Button>
+          <Link to="/products">
+            <Button size="lg" className="group">
+              {HERO_TEXT.ctaPrimary}
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+          <a href="#how-it-works">
+            <Button size="lg" variant="outline">
+              {HERO_TEXT.ctaSecondary}
+            </Button>
+          </a>
         </div>
 
         {/* Decorative elements */}
