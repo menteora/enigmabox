@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun, Box } from 'lucide-react';
 import { Button } from './ui/Button';
 import { useTheme } from '../context/ThemeContext';
-import { NAV_LINKS } from '../constants';
+import { NAV_LINKS, NAV_TEXT } from '../constants';
 
 export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <Box className="w-6 h-6" />
-          <span className="font-serif text-xl font-bold tracking-tight">Enigma Box</span>
+          <span className="font-serif text-xl font-bold tracking-tight">{NAV_TEXT.logo}</span>
         </div>
 
         {/* Desktop Links */}
@@ -54,7 +54,7 @@ export const Navbar: React.FC = () => {
           >
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          <Button size="sm">Acquista Ora</Button>
+          <Button size="sm">{NAV_TEXT.cta}</Button>
         </div>
 
         {/* Mobile Toggle */}
@@ -84,7 +84,7 @@ export const Navbar: React.FC = () => {
               {link.label}
             </a>
           ))}
-          <Button className="w-full mt-4">Acquista Ora</Button>
+          <Button className="w-full mt-4">{NAV_TEXT.cta}</Button>
         </div>
       )}
     </nav>
