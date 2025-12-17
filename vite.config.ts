@@ -10,7 +10,7 @@ export default defineConfig({
     react(), 
     tailwindcss(),
     vike({
-      prerender: true
+      // prerender: true
     })
   ],
   build: {
