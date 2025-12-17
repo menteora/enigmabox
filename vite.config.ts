@@ -10,22 +10,17 @@ export default defineConfig({
     react(), 
     tailwindcss(),
     vike({
-      // prerender: true
+      prerender: true
     })
   ],
   build: {
     target: 'es2015',
     outDir: 'dist',
-    emptyOutDir: true,
-    rollupOptions: {
-      // In sviluppo usiamo index.html -> index.tsx, 
-      // in build Vike genererà le sue pagine.
-      input: {
-        main: './index.html'
-      }
-    }
+    emptyOutDir: true
+    // Vike gestisce automaticamente rollupOptions.input. 
+    // Inserire './index.html' qui causerebbe errori durante il comando 'vike build'.
   },
   server: {
-    // Removed historyApiFallback as it is not a valid property in Vite's ServerOptions
+    // Configurazione standard per lo sviluppo
   }
 });
