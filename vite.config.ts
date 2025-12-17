@@ -21,7 +21,7 @@ const htmlBuildPlugin = () => {
 };
 
 export default defineConfig({
-  base: '/enigmabox/'
+  base: '/enigmabox/',
   plugins: [
     react(), 
     htmlBuildPlugin()
