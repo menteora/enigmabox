@@ -12,9 +12,9 @@ import {
 } from 'lucide-react';
 import { EmotionItem, StepItem, NavLink, Product } from './types';
 
-// Utility per gestire il base path sia in dev che in prod
-const isProd = typeof process !== 'undefined' && process.env?.NODE_ENV === 'production';
-const BASE_URL = isProd ? '/enigmabox' : '';
+// In ambiente sandbox di Google AI Studio, il base path deve essere gestito dinamicamente.
+// Usiamo una stringa vuota per permettere a HashRouter di gestire tutto internamente.
+const BASE_URL = '';
 
 // --- NAVIGAZIONE ---
 export const NAV_LINKS: NavLink[] = [

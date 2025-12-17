@@ -35,7 +35,6 @@
       }
     </script>
     <style type="text/css">
-      /* Stili critici per prevenire il flash bianco e gestire animazioni senza attendere il caricamento dei file CSS */
       body { background-color: #f9f7f2; }
       .dark body { background-color: #09090b; }
       
@@ -73,7 +72,7 @@
 </head>
   <body class="bg-[#f9f7f2] dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
     <div id="root"></div>
-    <!-- Caricamento relativo senza slash iniziale per forzare la risoluzione corretta nel sandbox -->
+    <!-- Caricamento relativo per risolvere correttamente nel sandbox -->
     <script type="module" src="index.tsx"></script>
   </body>
 </html>

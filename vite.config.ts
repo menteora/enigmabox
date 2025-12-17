@@ -6,12 +6,13 @@ import vike from 'vike/plugin';
 
 export default defineConfig({
   // Vike richiede che base inizi con '/', 'http://' o 'https://'
-  base: 'https://menteora.github.io/enigmabox/',
+  // Usiamo '/' per la massima compatibilità nell'ambiente di anteprima
+  base: '/',
   plugins: [
     react(), 
     tailwindcss(),
     vike({
-      // Il prerender viene eseguito durante la compilazione (npm run build)
+      // Il prerender viene eseguito solo durante la compilazione (npm run build)
       prerender: true 
     })
   ],
