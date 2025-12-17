@@ -1,3 +1,4 @@
+
 import { 
   Sparkles, 
   Heart, 
@@ -11,11 +12,15 @@ import {
 } from 'lucide-react';
 import { EmotionItem, StepItem, NavLink, Product } from './types';
 
+// Utility per gestire il base path sia in dev che in prod
+const isProd = typeof process !== 'undefined' && process.env?.NODE_ENV === 'production';
+const BASE_URL = isProd ? '/enigmabox' : '';
+
 // --- NAVIGAZIONE ---
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Le Enigma Box', href: '/products' },
-  { label: 'FAQ', href: '/faq' },
+  { label: 'Home', href: `${BASE_URL}/` },
+  { label: 'Le Enigma Box', href: `${BASE_URL}/products` },
+  { label: 'FAQ', href: `${BASE_URL}/faq` },
 ];
 
 export const NAV_TEXT = {
@@ -53,6 +58,9 @@ export const PRODUCTS: Product[] = [
     features: ['Finitura Soft-Touch', 'QR Code invisibile (UV)', 'Supporto Realtà Aumentata']
   }
 ];
+
+// Per link diretti fuori dalla navigazione principale
+export const getUrl = (path: string) => `${BASE_URL}${path.startsWith('/') ? path : '/' + path}`;
 
 // --- HERO SECTION ---
 export const HERO_TEXT = {
@@ -143,9 +151,9 @@ export const FOOTER_TEXT = {
     useful: {
       title: "Link Utili",
       links: [
-        { label: "Home", href: "/" },
-        { label: "Le Box", href: "/products" },
-        { label: "FAQ", href: "/faq" },
+        { label: "Home", href: `${BASE_URL}/` },
+        { label: "Le Box", href: `${BASE_URL}/products` },
+        { label: "FAQ", href: `${BASE_URL}/faq` },
       ]
     },
     legal: {

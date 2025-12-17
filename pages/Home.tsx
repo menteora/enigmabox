@@ -5,7 +5,7 @@ import { Hero } from '../components/Hero';
 import { EmotionsGrid } from '../components/EmotionsGrid';
 import { HowItWorks } from '../components/HowItWorks';
 import { Footer } from '../components/Footer';
-import { HOME_CTA_TEXT } from '../constants';
+import { HOME_CTA_TEXT, getUrl } from '../constants';
 
 const Home: React.FC = () => {
   return (
@@ -20,8 +20,8 @@ const Home: React.FC = () => {
           <p className="text-xl opacity-70 mb-10 font-light">
             {HOME_CTA_TEXT.subtitle}
           </p>
-          <a href="/products">
-            <button className="bg-[#1a1a1a] text-white dark:bg-white dark:text-black px-10 py-4 rounded-full text-lg font-medium hover:scale-105 transition-transform shadow-xl">
+          <a href={getUrl('/products')}>
+            <button className="bg-[#1a1a1a] text-white dark:bg-white dark:text-black px-10 py-4 rounded-full text-lg font-medium hover:scale-105 transition-transform shadow-xl cursor-pointer">
               {HOME_CTA_TEXT.button}
             </button>
           </a>

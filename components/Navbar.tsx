@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun, Box } from 'lucide-react';
 import { Button } from './ui/Button';
 import { useTheme } from '../context/ThemeContext';
-import { NAV_LINKS, NAV_TEXT } from '../constants';
+import { NAV_LINKS, NAV_TEXT, getUrl } from '../constants';
 
 export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
@@ -20,7 +20,7 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Chiude il menu mobile al cambio di percorso (per navigazione client-side)
+  // Chiude il menu mobile al cambio di percorso
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [currentPath]);
@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <a href={getUrl('/')} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <Box className="w-6 h-6" />
           <span className="font-serif text-xl font-bold tracking-tight">{NAV_TEXT.logo}</span>
         </a>
@@ -59,7 +59,7 @@ export const Navbar: React.FC = () => {
           >
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          <a href="/products">
+          <a href={getUrl('/products')}>
             <Button size="sm">{NAV_TEXT.cta}</Button>
           </a>
         </div>
@@ -85,7 +85,7 @@ export const Navbar: React.FC = () => {
               {link.label}
             </a>
           ))}
-          <a href="/products" className="w-full">
+          <a href={getUrl('/products')} className="w-full">
             <Button className="w-full mt-4" size="lg">{NAV_TEXT.cta}</Button>
           </a>
         </div>
