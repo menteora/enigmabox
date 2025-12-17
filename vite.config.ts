@@ -17,5 +17,15 @@ export default defineConfig({
     target: 'es2015',
     outDir: 'dist',
     emptyOutDir: true,
+    rollupOptions: {
+      // In sviluppo usiamo index.html -> index.tsx, 
+      // in build Vike genererà le sue pagine.
+      input: {
+        main: './index.html'
+      }
+    }
+  },
+  server: {
+    // Removed historyApiFallback as it is not a valid property in Vite's ServerOptions
   }
 });

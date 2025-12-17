@@ -5,8 +5,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Vike inietterà qui i metadati, il CSS e il titolo -->
-  <script type="importmap">
+    
+    <!-- Tailwind CSS v4 Browser Script per Google Studio AI -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <script type="importmap">
 {
   "imports": {
     "vite": "https://esm.sh/vite@^7.3.0",
@@ -18,13 +21,14 @@
     "clsx": "https://esm.sh/clsx@^2.1.1",
     "@tailwindcss/vite": "https://esm.sh/@tailwindcss/vite@^4.1.18",
     "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0",
-    "vike/": "https://esm.sh/vike@^0.4.249/"
+    "vike/": "https://esm.sh/vike@^0.4.249/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "vike-react/": "https://esm.sh/vike-react@^0.6.16/"
   }
 }
 </script>
 </head>
   <body class="bg-cream-100 dark:bg-zinc-950 text-ink-900 dark:text-gray-100 transition-colors duration-300">
     <div id="page-view"></div>
-    <!-- Vike gestirà automaticamente l'inserimento degli script necessari per l'idratazione -->
   </body>
 </html>
