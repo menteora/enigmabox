@@ -13,14 +13,13 @@ export default defineConfig({
       prerender: true
     })
   ],
+  ssr: {
+    // Necessario affinché Vike possa elaborare l'estensione vike-react
+    noExternal: ['vike-react']
+  },
   build: {
-    target: 'es2015',
+    target: 'esnext',
     outDir: 'dist',
     emptyOutDir: true
-    // Vike gestisce automaticamente rollupOptions.input. 
-    // Inserire './index.html' qui causerebbe errori durante il comando 'vike build'.
-  },
-  server: {
-    // Configurazione standard per lo sviluppo
   }
 });
