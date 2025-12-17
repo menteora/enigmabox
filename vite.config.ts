@@ -18,6 +18,7 @@ function htmlBuildPlugin(): Plugin {
 }
 
 export default defineConfig({
+  base:'/enigmabox/',
   plugins: [
     react(), 
     tailwindcss(),
