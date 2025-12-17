@@ -5,12 +5,16 @@ import { PageShell } from './PageShell';
 import type { PageContextClient } from 'vike/types';
 
 export async function onRenderClient(pageContext: PageContextClient) {
-  // Page e pageProps vengono iniettati da vike-react a runtime
+  console.log("[vike] onRenderClient started", { 
+    isHydration: pageContext.isHydration,
+    urlOriginal: pageContext.urlOriginal 
+  });
+
   const { Page, pageProps } = pageContext as any;
   const container = document.getElementById('page-view');
   
   if (!container) {
-    console.error('Elemento #page-view non trovato nel DOM.');
+    console.error('[vike] Elemento #page-view non trovato nel DOM.');
     return;
   }
 
@@ -20,12 +24,18 @@ export async function onRenderClient(pageContext: PageContextClient) {
     </PageShell>
   );
 
-  // Se il container ha già dell'HTML (prodotto dal prerendering), usiamo hydrateRoot
-  if (pageContext.isHydration && container.innerHTML !== '') {
-    hydrateRoot(container, page);
-  } else {
-    // Altrimenti creiamo un nuovo root (navigazione client-side)
-    const root = createRoot(container);
-    root.render(page);
+  try {
+    if (pageContext.isHydration && container.innerHTML !== '') {
+      console.log("[vike] Hydrating root...");
+      hydrateRoot(container, page);
+      console.log("[vike] Hydration complete");
+    } else {
+      console.log("[vike] Creating new root (client-side navigation)...");
+      const root = createRoot(container);
+      root.render(page);
+      console.log("[vike] Render complete");
+    }
+  } catch (err) {
+    console.error("[vike] Error during rendering:", err);
   }
 }

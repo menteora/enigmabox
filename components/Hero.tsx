@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { ArrowRight } from 'lucide-react';
-import { HERO_TEXT } from '../constants';
+import { HERO_TEXT, getUrl } from '../constants';
 
 export const Hero: React.FC = () => {
   return (
@@ -24,7 +24,7 @@ export const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up delay-300">
-          <a href="/products">
+          <a href={getUrl('/products')}>
             <Button size="lg" className="group">
               {HERO_TEXT.ctaPrimary}
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
