@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
@@ -6,8 +7,11 @@ import { Button } from '../components/ui/Button';
 import { PRODUCTS } from '../constants';
 import { Check, ArrowLeft, ShieldCheck, Truck } from 'lucide-react';
 
-const ProductDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+const ProductDetail: React.FC<{ id?: string }> = (props) => {
+  // Supporta sia useParams (SPA) che props dirette (Vike)
+  const { id: routeId } = useParams<{ id: string }>();
+  const id = props.id || routeId;
+  
   const product = PRODUCTS.find(p => p.id === id);
 
   if (!product) {
@@ -24,12 +28,10 @@ const ProductDetail: React.FC = () => {
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Immagine Prodotto */}
           <div className={`aspect-square rounded-3xl ${product.imageColor} flex items-center justify-center relative overflow-hidden animate-fade-in-up`}>
             <span className="text-9xl font-serif opacity-10">{product.title.charAt(0)}</span>
           </div>
 
-          {/* Info Prodotto */}
           <div className="flex flex-col justify-center animate-fade-in-up delay-100">
             <h1 className="font-serif text-4xl md:text-5xl mb-4">{product.title}</h1>
             <div className="text-2xl font-mono opacity-80 mb-8">€{product.price.toFixed(2)}</div>
@@ -56,20 +58,16 @@ const ProductDetail: React.FC = () => {
               <Button size="lg" className="w-full md:w-auto">
                 Aggiungi al Carrello
               </Button>
-              <p className="text-xs text-center md:text-left opacity-50 mt-2">
-                *Il messaggio digitale si carica dopo l'acquisto
-              </p>
             </div>
 
-            {/* Badges */}
             <div className="grid grid-cols-2 gap-4 mt-12 pt-8 border-t border-black/10 dark:border-white/10">
               <div className="flex items-center gap-3 opacity-60">
                 <ShieldCheck className="w-5 h-5" />
-                <span className="text-xs">Garanzia soddisfatti o rimborsati</span>
+                <span className="text-xs">Garanzia 100%</span>
               </div>
               <div className="flex items-center gap-3 opacity-60">
                 <Truck className="w-5 h-5" />
-                <span className="text-xs">Spedizione gratuita sopra i 100€</span>
+                <span className="text-xs">Consegna Rapida</span>
               </div>
             </div>
           </div>

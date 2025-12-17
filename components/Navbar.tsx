@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun, Box } from 'lucide-react';
 import { Button } from './ui/Button';
@@ -9,7 +10,15 @@ export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  
+  // hook sicuro: se siamo in Vike (SSR) potrebbe non essere disponibile 
+  // quindi usiamo un fallback per evitare crash in build
+  let location = { pathname: '/' };
+  try {
+    location = useLocation();
+  } catch (e) {
+    // In ambiente SSR useLocation potrebbe fallire se non c'è un router
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +28,17 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Chiude il menu mobile quando cambia la rotta
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location]);
+  }, [location.pathname]);
+
+  // Funzione per generare l'href corretto a seconda dell'ambiente
+  const getHref = (href: string) => {
+    // In HashRouter (SPA), react-router gestisce il prefix #
+    // Per Vike (SSG), vogliamo link puliti. 
+    // Usando <Link> di react-router-dom, funzionerà nella SPA.
+    return href;
+  };
 
   return (
     <nav 
@@ -33,18 +49,16 @@ export const Navbar: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <Box className="w-6 h-6" />
           <span className="font-serif text-xl font-bold tracking-tight">{NAV_TEXT.logo}</span>
         </Link>
 
-        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <Link 
               key={link.label} 
-              to={link.href}
+              to={getHref(link.href)}
               className={`text-sm font-medium hover:opacity-70 transition-opacity ${location.pathname === link.href ? 'opacity-100 underline decoration-1 underline-offset-4' : 'opacity-70'}`}
             >
               {link.label}
@@ -52,7 +66,6 @@ export const Navbar: React.FC = () => {
           ))}
         </div>
 
-        {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
           <button 
             onClick={toggleTheme}
@@ -66,12 +79,8 @@ export const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
         <div className="md:hidden flex items-center gap-4">
-          <button 
-            onClick={toggleTheme}
-            className="p-2"
-          >
+          <button onClick={toggleTheme} className="p-2">
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -80,13 +89,12 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full min-h-screen bg-[#f9f7f2] dark:bg-zinc-950 border-b border-black/5 dark:border-white/5 p-6 flex flex-col gap-6 shadow-xl">
           {NAV_LINKS.map((link) => (
             <Link 
               key={link.label} 
-              to={link.href}
+              to={getHref(link.href)}
               className="text-2xl font-serif font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               {link.label}
