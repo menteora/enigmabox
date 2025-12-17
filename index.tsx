@@ -7,6 +7,10 @@ import './index.css';
 const container = document.getElementById('root');
 
 if (container) {
+  if (container.hasChildNodes()) {
+    container.innerHTML = '';
+  }
+
   createRoot(container).render(
     <React.StrictMode>
       <ThemeProvider>
