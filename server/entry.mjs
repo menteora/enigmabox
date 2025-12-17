@@ -171,7 +171,7 @@ const virtualFileExportsGlobalEntry = /*#__PURE__*/Object.freeze(/*#__PURE__*/Ob
     "src": "_index-bca1542f.Cp0TlRf4.css"
   },
   "node_modules/vike/dist/client/runtime-client-routing/entry.js": {
-    "file": "assets/entries/entry-client-routing.DbeHUpiI.js",
+    "file": "assets/entries/entry-client-routing.DQe028W2.js",
     "name": "entries/entry-client-routing",
     "src": "node_modules/vike/dist/client/runtime-client-routing/entry.js",
     "isEntry": true,
@@ -245,7 +245,7 @@ const virtualFileExportsGlobalEntry = /*#__PURE__*/Object.freeze(/*#__PURE__*/Ob
     "build": {
       "outDir": "/home/runner/work/enigmabox/enigmabox/dist/"
     },
-    "_baseViteOriginal": "/",
+    "_baseViteOriginal": "https://menteora.github.io/enigmabox/",
     "vitePluginServerEntry": {}
   }
 };
