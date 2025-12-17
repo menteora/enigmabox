@@ -24,7 +24,7 @@
   "reactSnap": {
     "source": "dist",
     "publicPath": "/enigmabox/",
-    "inlineCss": true,
+    "inlineCss": false,
     "fixWebpackChunksIssue": false,
     "puppeteerArgs": [
       "--no-sandbox",
