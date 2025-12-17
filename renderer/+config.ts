@@ -3,12 +3,15 @@ import vikeReact from 'vike-react/config';
 import { PageShell } from './PageShell';
 
 export default {
-  // Estende vike-react utilizzando l'import ESM compatibile con Vite e Vike V1
+  // Estende vike-react
   extends: [vikeReact],
   
-  // Specifica il componente Layout (fornito da vike-react)
+  // Abilita il pre-rendering (SSG)
+  prerender: true,
+  
+  // Specifica il componente Layout
   Layout: PageShell,
   
-  // Titolo predefinito per l'applicazione
+  // Titolo predefinito
   title: "Enigma Box - Regala un'emozione",
 };

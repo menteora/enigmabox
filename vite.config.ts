@@ -9,12 +9,9 @@ export default defineConfig({
   plugins: [
     react(), 
     tailwindcss(),
-    vike({
-      prerender: true
-    })
+    vike()
   ],
   ssr: {
-    // Necessario affinché Vike possa elaborare l'estensione vike-react
     noExternal: ['vike-react']
   },
   build: {
