@@ -7,7 +7,7 @@ import vike from 'vike/plugin';
 export default defineConfig({
   // Vike richiede che base inizi con '/', 'http://' o 'https://'
   // Usiamo '/' per la massima compatibilità nell'ambiente di anteprima
-  base: '/',
+  base: 'https://menteora.github.io/enigmabox/',
   plugins: [
     react(), 
     tailwindcss(),
