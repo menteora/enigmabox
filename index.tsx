@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
@@ -15,19 +16,25 @@ if (container) {
     container.innerHTML = '';
   }
 
+  // Recupera il base URL dal build tool (default '/')
+  // Fixed: Property 'env' does not exist on type 'ImportMeta' by casting to any
+  const baseUrl = (import.meta as any).env?.BASE_URL || '/';
+
   createRoot(container).render(
     <React.StrictMode>
       <ThemeProvider>
-        {/* HashRouter è ideale per ambienti di preview o server statici senza configurazione di rewrite */}
-        <HashRouter>
+        {/* Passaggio a BrowserRouter per URL puliti senza # */}
+        <BrowserRouter basename={baseUrl}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Catalog />} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="*" element={<Home />} />
+            
+            {/* 404 Fallback: Qualsiasi rotta non definita reindirizza alla Home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </ThemeProvider>
     </React.StrictMode>
   );
