@@ -1,0 +1,86 @@
+{
+  "_chunk-BAh4JXMg.js": {
+    "file": "assets/chunks/chunk-BAh4JXMg.js",
+    "name": "Loading",
+    "css": [
+      "assets/static/index-bca1542f.Cp0TlRf4.css"
+    ]
+  },
+  "_chunk-CLr09eor.js": {
+    "file": "assets/chunks/chunk-CLr09eor.js",
+    "name": "arrow-right",
+    "imports": [
+      "_chunk-BAh4JXMg.js"
+    ]
+  },
+  "_index-bca1542f.Cp0TlRf4.css": {
+    "file": "assets/static/index-bca1542f.Cp0TlRf4.css",
+    "src": "_index-bca1542f.Cp0TlRf4.css"
+  },
+  "node_modules/vike/dist/client/runtime-client-routing/entry.js": {
+    "file": "assets/entries/entry-client-routing.DbeHUpiI.js",
+    "name": "entries/entry-client-routing",
+    "src": "node_modules/vike/dist/client/runtime-client-routing/entry.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "virtual:vike:page-entry:client:/pages/faq",
+      "virtual:vike:page-entry:client:/pages/index",
+      "virtual:vike:page-entry:client:/pages/products",
+      "virtual:vike:page-entry:client:/pages/products/@id"
+    ]
+  },
+  "virtual:vike:page-entry:client:/pages/faq": {
+    "file": "assets/entries/pages_faq.SQcmHGcL.js",
+    "name": "entries/pages/faq",
+    "src": "virtual:vike:page-entry:client:/pages/faq",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-BAh4JXMg.js"
+    ],
+    "css": [
+      "assets/static/index-bca1542f.Cp0TlRf4.css"
+    ]
+  },
+  "virtual:vike:page-entry:client:/pages/index": {
+    "file": "assets/entries/pages_index.CugDeiIb.js",
+    "name": "entries/pages/index",
+    "src": "virtual:vike:page-entry:client:/pages/index",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-BAh4JXMg.js",
+      "_chunk-CLr09eor.js"
+    ],
+    "css": [
+      "assets/static/index-bca1542f.Cp0TlRf4.css"
+    ]
+  },
+  "virtual:vike:page-entry:client:/pages/products": {
+    "file": "assets/entries/pages_products.BDmt6uQz.js",
+    "name": "entries/pages/products",
+    "src": "virtual:vike:page-entry:client:/pages/products",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-BAh4JXMg.js",
+      "_chunk-CLr09eor.js"
+    ],
+    "css": [
+      "assets/static/index-bca1542f.Cp0TlRf4.css"
+    ]
+  },
+  "virtual:vike:page-entry:client:/pages/products/@id": {
+    "file": "assets/entries/pages_products_-id.BYGL2qc5.js",
+    "name": "entries/pages/products/@id",
+    "src": "virtual:vike:page-entry:client:/pages/products/@id",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-BAh4JXMg.js"
+    ],
+    "css": [
+      "assets/static/index-bca1542f.Cp0TlRf4.css"
+    ]
+  }
+}
