@@ -1,5 +1,5 @@
+
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from './ui/Button';
 import { ArrowRight } from 'lucide-react';
 import { HERO_TEXT } from '../constants';
@@ -24,12 +24,12 @@ export const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up delay-300">
-          <Link to="/products">
+          <a href="/products">
             <Button size="lg" className="group">
               {HERO_TEXT.ctaPrimary}
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
-          </Link>
+          </a>
           <a href="#how-it-works">
             <Button size="lg" variant="outline">
               {HERO_TEXT.ctaSecondary}
@@ -37,16 +37,13 @@ export const Hero: React.FC = () => {
           </a>
         </div>
 
-        {/* Decorative elements */}
         <div className="mt-20 relative w-full max-w-4xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up delay-500 bg-neutral-200 dark:bg-neutral-800">
-          {/* Placeholder for Hero Image */}
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-stone-200 to-stone-100 dark:from-zinc-800 dark:to-zinc-700">
             <span className="opacity-20 font-serif text-4xl italic">{HERO_TEXT.imgPlaceholder}</span>
           </div>
         </div>
       </div>
       
-      {/* Background decoration */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-100/30 dark:bg-amber-900/10 rounded-full blur-3xl -z-10 pointer-events-none" />
     </section>
   );

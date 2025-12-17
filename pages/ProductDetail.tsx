@@ -1,21 +1,27 @@
 
 import React from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Button } from '../components/ui/Button';
 import { PRODUCTS } from '../constants';
 import { Check, ArrowLeft, ShieldCheck, Truck } from 'lucide-react';
 
-const ProductDetail: React.FC<{ id?: string }> = (props) => {
-  // Supporta sia useParams (SPA) che props dirette (Vike)
-  const { id: routeId } = useParams<{ id: string }>();
-  const id = props.id || routeId;
-  
+interface ProductDetailProps {
+  id?: string;
+}
+
+const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
   const product = PRODUCTS.find(p => p.id === id);
 
   if (!product) {
-    return <Navigate to="/products" replace />;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-serif mb-4">Prodotto non trovato</h1>
+          <a href="/products" className="underline">Torna al catalogo</a>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -23,9 +29,9 @@ const ProductDetail: React.FC<{ id?: string }> = (props) => {
       <Navbar />
       
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <Link to="/products" className="inline-flex items-center text-sm opacity-60 hover:opacity-100 mb-8 transition-opacity">
+        <a href="/products" className="inline-flex items-center text-sm opacity-60 hover:opacity-100 mb-8 transition-opacity">
           <ArrowLeft className="w-4 h-4 mr-2" /> Torna al catalogo
-        </Link>
+        </a>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           <div className={`aspect-square rounded-3xl ${product.imageColor} flex items-center justify-center relative overflow-hidden animate-fade-in-up`}>

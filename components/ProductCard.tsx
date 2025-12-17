@@ -1,5 +1,5 @@
+
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Product } from '../types';
 
@@ -9,8 +9,8 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <Link 
-      to={`/products/${product.id}`}
+    <a 
+      href={`/products/${product.id}`}
       className="group flex flex-col bg-white dark:bg-white/5 rounded-2xl overflow-hidden border border-black/5 dark:border-white/5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       <div className={`aspect-square w-full ${product.imageColor} relative flex items-center justify-center overflow-hidden`}>
@@ -33,6 +33,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           Scopri di più <ArrowRight className="w-4 h-4 ml-1" />
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
