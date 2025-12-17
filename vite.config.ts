@@ -2,7 +2,7 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import prerender from 'vite-plugin-prerender';
+import prerender from 'vite-plugin-ssg-prerender';
 import path from 'path';
 
 // Plugin per rimuovere script CDN e importmaps durante il build
@@ -26,8 +26,6 @@ export default defineConfig({
     tailwindcss(),
     htmlBuildPlugin(),
     prerender({
-      // Directory di output del build
-      staticDir: path.join(__dirname, 'dist'),
       // Rotte necessarie: Home, Catalogo, FAQ e i singoli prodotti per SEO
       routes: [
         '/', 
@@ -37,13 +35,12 @@ export default defineConfig({
         '/products/box-midnight', 
         '/faq'
       ],
-      // FIX: Renamed 'rendererOptions' to 'renderer' as 'rendererOptions' does not exist in type 'VitePluginPrerender'.
-      // The 'renderer' property accepts a configuration object or instance in most Vite prerender plugin versions.
-      renderer: {
-        maxConcurrentRoutes: 4,
-        // Attendiamo l'evento custom nel DOM per assicurarci che React abbia finito il mount
-        renderAfterDocumentEvent: 'custom-render-trigger'
-      }
+      // Opzioni per ssg-prerender
+      puppeteerOptions: {
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      },
+      // Attendiamo l'evento custom nel DOM per assicurarci che React abbia finito il mount
+      renderAfterDocumentEvent: 'custom-render-trigger'
     })
   ],
   build: {
