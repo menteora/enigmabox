@@ -18,7 +18,7 @@ function htmlBuildPlugin(): Plugin {
 }
 
 export default defineConfig({
-  base: 'enigmabox/', // Percorsi relativi per supportare HashRouter e ambienti di preview dinamici
+  base: '/', // Utilizziamo la root per massimizzare la compatibilità con BrowserRouter
   plugins: [
     react(), 
     tailwindcss(),
