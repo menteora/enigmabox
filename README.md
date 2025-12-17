@@ -24,3 +24,4 @@ L'app è configurata per funzionare sia come **SPA tradizionale** (tramite `inde
 
 ---
 **Enigma Box** - *Racchiudi un'emozione.*
+
