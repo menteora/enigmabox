@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
 import { EmotionsGrid } from '../components/EmotionsGrid';
@@ -19,9 +20,11 @@ const Home: React.FC = () => {
           <p className="text-xl opacity-70 mb-10 font-light">
             {HOME_CTA_TEXT.subtitle}
           </p>
-          <button className="bg-[#1a1a1a] text-white dark:bg-white dark:text-black px-10 py-4 rounded-full text-lg font-medium hover:scale-105 transition-transform shadow-xl">
-            {HOME_CTA_TEXT.button}
-          </button>
+          <Link to="/products">
+            <button className="bg-[#1a1a1a] text-white dark:bg-white dark:text-black px-10 py-4 rounded-full text-lg font-medium hover:scale-105 transition-transform shadow-xl">
+              {HOME_CTA_TEXT.button}
+            </button>
+          </Link>
         </div>
       </section>
       <Footer />

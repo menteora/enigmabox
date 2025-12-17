@@ -9,20 +9,50 @@ import {
   MessageSquareText, 
   ScanQrCode 
 } from 'lucide-react';
-import { EmotionItem, StepItem, NavLink } from './types';
+import { EmotionItem, StepItem, NavLink, Product } from './types';
 
 // --- NAVIGAZIONE ---
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Come funziona', href: '#how-it-works' },
-  { label: 'Le Enigma Box', href: '#products' },
-  { label: 'Recensioni', href: '#reviews' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Home', href: '/' },
+  { label: 'Le Enigma Box', href: '/products' },
+  { label: 'FAQ', href: '/faq' },
 ];
 
 export const NAV_TEXT = {
   logo: 'Enigma Box',
   cta: 'Acquista Ora'
 };
+
+// --- PRODUCTS DATA ---
+export const PRODUCTS: Product[] = [
+  {
+    id: 'box-classica',
+    title: 'Enigma Classic',
+    price: 49.00,
+    shortDescription: 'L\'eleganza senza tempo per ogni occasione.',
+    description: 'La Enigma Classic è il punto di partenza perfetto. Realizzata in cartone pregiato con finiture in oro a caldo, questa scatola è ideale per custodire messaggi di affetto, auguri di compleanno o semplici pensieri che meritano di essere ricordati.',
+    imageColor: 'bg-stone-200 dark:bg-stone-800',
+    features: ['QR Code personalizzato', 'Messaggio audio/video fino a 2min', 'Materiali riciclabili premium']
+  },
+  {
+    id: 'box-wood',
+    title: 'Wood Edition',
+    price: 89.00,
+    shortDescription: 'Calore naturale e artigianalità per momenti preziosi.',
+    description: 'Intagliata in legno di noce sostenibile, la Wood Edition è pensata per durare nel tempo. Una vera e propria cassaforte di ricordi che diventa un complemento d\'arredo. Perfetta per anniversari e matrimoni.',
+    imageColor: 'bg-amber-200 dark:bg-amber-900',
+    features: ['Legno massello', 'Incisione personalizzata', 'Messaggio video 4K illimitato', 'Accesso prioritario al cloud']
+  },
+  {
+    id: 'box-midnight',
+    title: 'Midnight Mystery',
+    price: 65.00,
+    shortDescription: 'Un tocco di mistero con finiture nere opache.',
+    description: 'Per chi ama il design moderno e minimale. La Midnight Mystery si presenta con una finitura soft-touch nera profonda e dettagli lucidi. Ideale per sorprese intriganti e rivelazioni inaspettate.',
+    imageColor: 'bg-slate-800 dark:bg-black',
+    features: ['Finitura Soft-Touch', 'QR Code invisibile (UV)', 'Supporto Realtà Aumentata']
+  }
+];
 
 // --- HERO SECTION ---
 export const HERO_TEXT = {
@@ -85,6 +115,26 @@ export const HOME_CTA_TEXT = {
   button: "Acquista la tua Enigma Box"
 };
 
+// --- FAQ DATA ---
+export const FAQS = [
+  {
+    q: "Come carico il mio messaggio?",
+    a: "Dopo l'acquisto riceverai un link via email. Potrai caricare video, foto o testo quando vuoi, anche dopo che la scatola è stata spedita."
+  },
+  {
+    q: "Il destinatario vede il messaggio subito?",
+    a: "No! Il destinatario vedrà solo un bellissimo QR code. Dovrà scansionarlo per rivelare il contenuto segreto."
+  },
+  {
+    q: "Posso cambiare il messaggio dopo?",
+    a: "Sì, hai 24 ore di tempo dalla prima scansione per modificare il contenuto, oppure puoi acquistare l'opzione 'Messaggio Dinamico' per cambiarlo sempre."
+  },
+  {
+    q: "Quali sono i tempi di spedizione?",
+    a: "Spediamo in 24/48 ore lavorative in tutta Italia."
+  }
+];
+
 // --- FOOTER ---
 export const FOOTER_TEXT = {
   brandDesc: "Regala un'emozione che dura per sempre. Il modo più originale per dire ciò che provi.",
@@ -93,17 +143,15 @@ export const FOOTER_TEXT = {
     useful: {
       title: "Link Utili",
       links: [
-        { label: "Chi siamo", href: "#" },
-        { label: "Contatti", href: "#" },
-        { label: "Spedizioni", href: "#" },
-        { label: "Resi", href: "#" }
+        { label: "Home", href: "/" },
+        { label: "Le Box", href: "/products" },
+        { label: "FAQ", href: "/faq" },
       ]
     },
     legal: {
       title: "Legale",
       links: [
         { label: "Privacy Policy", href: "#" },
-        { label: "Cookie Policy", href: "#" },
         { label: "Termini e Condizioni", href: "#" }
       ]
     }
