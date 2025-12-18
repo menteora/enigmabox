@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Box, Instagram, Facebook, Mail } from 'lucide-react';
-import { FOOTER_TEXT, NAV_TEXT } from '../constants';
+import { FOOTER_TEXT, NAV_TEXT, getUrl } from '../constants';
 
 export const Footer: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ export const Footer: React.FC = () => {
             <Box className="w-6 h-6" />
             <span className="font-serif text-xl font-bold">{NAV_TEXT.logo}</span>
           </div>
-          <p className="opacity-60 max-w-sm mb-8 font-light">
+          <p className="opacity-60 max-sm mb-8 font-light">
             {FOOTER_TEXT.brandDesc}
           </p>
           <div className="flex gap-4 opacity-60">
@@ -27,7 +28,7 @@ export const Footer: React.FC = () => {
           <ul className="space-y-4 opacity-60 font-light">
             {FOOTER_TEXT.columns.useful.links.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="hover:opacity-100 transition-opacity">{link.label}</a>
+                <a href={getUrl(link.href)} className="hover:opacity-100 transition-opacity">{link.label}</a>
               </li>
             ))}
           </ul>

@@ -1,9 +1,10 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Button } from '../components/ui/Button';
-import { PRODUCTS, getUrl } from '../constants';
+import { PRODUCTS, IS_ONE_PAGE } from '../constants';
 import { Check, ArrowLeft, ShieldCheck, Truck } from 'lucide-react';
 
 interface ProductDetailProps {
@@ -11,14 +12,27 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
+  const navigate = useNavigate();
   const product = PRODUCTS.find(p => p.id === id);
+
+  const handleBack = () => {
+    if (IS_ONE_PAGE) {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById('products');
+        if (el) window.scrollTo({ top: el.offsetTop - 80 });
+      }, 50);
+    } else {
+      navigate('/products');
+    }
+  };
 
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-serif mb-4">Prodotto non trovato</h1>
-          <a href={getUrl('/products')} className="underline">Torna al catalogo</a>
+          <button onClick={() => navigate('/')} className="underline">Torna alla Home</button>
         </div>
       </div>
     );
@@ -29,9 +43,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
       <Navbar />
       
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <a href={getUrl('/products')} className="inline-flex items-center text-sm opacity-60 hover:opacity-100 mb-8 transition-opacity">
+        <button onClick={handleBack} className="inline-flex items-center text-sm opacity-60 hover:opacity-100 mb-8 transition-opacity">
           <ArrowLeft className="w-4 h-4 mr-2" /> Torna al catalogo
-        </a>
+        </button>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           <div className={`aspect-square rounded-3xl ${product.imageColor} flex items-center justify-center relative overflow-hidden animate-fade-in-up`}>
