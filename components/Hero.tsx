@@ -1,27 +1,10 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/Button';
 import { ArrowRight } from 'lucide-react';
-import { HERO_TEXT, IS_ONE_PAGE } from '../constants';
+import { HERO_TEXT, getUrl } from '../constants';
 
 export const Hero: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleCta = () => {
-    if (IS_ONE_PAGE) {
-      const el = document.getElementById('products');
-      if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-    } else {
-      navigate('/products');
-    }
-  };
-
-  const handleSecondary = () => {
-    const el = document.getElementById('how-it-works');
-    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-  };
-
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="container px-6 mx-auto flex flex-col items-center text-center z-10">
@@ -41,13 +24,17 @@ export const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up delay-300">
-          <Button size="lg" className="group" onClick={handleCta}>
-            {HERO_TEXT.ctaPrimary}
-            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-          </Button>
-          <Button size="lg" variant="outline" onClick={handleSecondary}>
-            {HERO_TEXT.ctaSecondary}
-          </Button>
+          <a href={getUrl('/products')}>
+            <Button size="lg" className="group">
+              {HERO_TEXT.ctaPrimary}
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </a>
+          <a href="#how-it-works">
+            <Button size="lg" variant="outline">
+              {HERO_TEXT.ctaSecondary}
+            </Button>
+          </a>
         </div>
 
         <div className="mt-20 relative w-full max-w-4xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up delay-500 bg-neutral-200 dark:bg-neutral-800">
