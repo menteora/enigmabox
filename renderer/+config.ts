@@ -6,6 +6,10 @@ export default {
   // Estende vike-react
   extends: [vikeReact],
   
+  // Configurazione Base Path per distribuzione in sottocartella
+  baseAssets: '/enigmabox/',
+  baseServer: '/enigmabox/',
+  
   // Abilita il pre-rendering (SSG)
   prerender: true,
   
