@@ -72,15 +72,12 @@ export const PRODUCTS: Product[] = [
  * - Altrimenti (HashRouter): restituisce il path con il prefisso dell'hash.
  */
 export const getUrl = (path: string) => {
-  // Rimuovi il BASE_URL dall'inizio se presente per normalizzare il path
-  let cleanPath = (BASE_URL && path.startsWith(BASE_URL)) 
-    ? path.slice(BASE_URL.length) 
-    : path;
-  
-  if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+  const base = (BASE_URL ?? "").replace(/\/+$/, ""); // niente slash finali
+  let p = path.replace(base, "");                    // se passano già URL completi
+  if (!p.startsWith("/")) p = "/" + p;
 
-  if (IS_NO_BASE) return cleanPath;
-  return `${BASE_URL}/${cleanPath}`;
+  if (IS_NO_BASE || !base) return p;
+  return `${base}${p}`; // <-- qui sparisce il problema dei //
 };
 
 // --- HERO SECTION ---
