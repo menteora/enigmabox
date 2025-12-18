@@ -25,9 +25,9 @@ export const IS_NO_BASE = !BASE_URL;
 
 // --- NAVIGAZIONE ---
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Le Enigma Box', href: '/products' },
-  { label: 'FAQ', href: '/faq' },
+  { label: 'Home', href: `${BASE_URL}/` },
+  { label: 'Le Enigma Box', href: `${BASE_URL}/products` },
+  { label: 'FAQ', href: `${BASE_URL}/faq` },
 ];
 
 export const NAV_TEXT = {
@@ -68,11 +68,17 @@ export const PRODUCTS: Product[] = [
 
 /**
  * Genera l'URL corretto:
- * - Se IS_NO_BASE (MemoryRouter): restituisce il path pulito.
- * - Altrimenti (HashRouter): restituisce il path con il prefisso dell'hash e base_url.
+ * - Se IS_NO_BASE (MemoryRouter): restituisce il path pulito (senza hash).
+ * - Altrimenti (HashRouter): restituisce il path con il prefisso dell'hash.
  */
 export const getUrl = (path: string) => {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  // Rimuovi il BASE_URL dall'inizio se presente per normalizzare il path
+  let cleanPath = (BASE_URL && path.startsWith(BASE_URL)) 
+    ? path.slice(BASE_URL.length) 
+    : path;
+  
+  if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+
   if (IS_NO_BASE) return cleanPath;
   return `${BASE_URL}/#${cleanPath}`;
 };

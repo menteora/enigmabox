@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter, MemoryRouter, Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
+import { HashRouter, MemoryRouter, Routes, Route, Navigate, useLocation, useParams, useNavigate } from 'react-router-dom';
 import { PageShell } from './renderer/PageShell';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
@@ -9,7 +9,30 @@ import ProductDetail from './pages/ProductDetail';
 import FAQ from './pages/FAQ';
 import { IS_NO_BASE } from './constants';
 
-// Componente di debug per monitorare i cambiamenti di rotta
+/**
+ * Componente che ascolta l'evento 'soft-navigate' per gestire la navigazione 
+ * programmatica nel MemoryRouter senza causare ricaricamenti di pagina che 
+ * farebbero crashare l'iframe di Google AI Studio.
+ */
+const NavigationListener = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    const handleSoftNavigate = (e: any) => {
+      const targetPath = e.detail;
+      if (targetPath && targetPath !== location.pathname) {
+        navigate(targetPath);
+      }
+    };
+
+    window.addEventListener('soft-navigate', handleSoftNavigate);
+    return () => window.removeEventListener('soft-navigate', handleSoftNavigate);
+  }, [navigate, location]);
+
+  return null;
+};
+
 const RouterMonitor = () => {
   const location = useLocation();
   React.useEffect(() => {
@@ -19,13 +42,14 @@ const RouterMonitor = () => {
 };
 
 const App = () => {
-  // Se non c'è BASE_URL (Studio/Local), usiamo MemoryRouter per evitare redirect indesiderati.
-  // Se c'è BASE_URL, usiamo HashRouter come richiesto per la compatibilità con GitHub Pages.
+  // Se non c'è BASE_URL (Studio/Local), usiamo MemoryRouter per non sporcare l'URL del browser padre.
+  // Se c'è BASE_URL, usiamo HashRouter per la compatibilità con GitHub Pages.
   const Router = IS_NO_BASE ? MemoryRouter : HashRouter;
 
   return (
     <PageShell>
       <Router>
+        <NavigationListener />
         <RouterMonitor />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -52,5 +76,4 @@ if (container) {
       <App />
     </React.StrictMode>
   );
-  console.log(`[App] Montata correttamente con ${IS_NO_BASE ? 'MemoryRouter' : 'HashRouter'}`);
 }

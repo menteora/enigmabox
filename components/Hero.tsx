@@ -2,9 +2,16 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { ArrowRight } from 'lucide-react';
-import { HERO_TEXT, getUrl } from '../constants';
+import { HERO_TEXT, getUrl, IS_NO_BASE } from '../constants';
 
 export const Hero: React.FC = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (IS_NO_BASE) {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('soft-navigate', { detail: path }));
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="container px-6 mx-auto flex flex-col items-center text-center z-10">
@@ -24,7 +31,10 @@ export const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up delay-300">
-          <a href={getUrl('/products')}>
+          <a 
+            href={getUrl('/products')}
+            onClick={(e) => handleLinkClick(e, '/products')}
+          >
             <Button size="lg" className="group">
               {HERO_TEXT.ctaPrimary}
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
