@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter, MemoryRouter, Routes, Route, Navigate, useLocation, useParams, useNavigate } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Routes, Route, Navigate, useLocation, useParams, useNavigate } from 'react-router-dom';
 import { PageShell } from './renderer/PageShell';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
@@ -44,7 +44,7 @@ const RouterMonitor = () => {
 const App = () => {
   // Se non c'è BASE_URL (Studio/Local), usiamo MemoryRouter per non sporcare l'URL del browser padre.
   // Se c'è BASE_URL, usiamo HashRouter per la compatibilità con GitHub Pages.
-  const Router = IS_NO_BASE ? MemoryRouter : HashRouter;
+  const Router = IS_NO_BASE ? MemoryRouter : BrowserRouter;
 
   return (
     <PageShell>
