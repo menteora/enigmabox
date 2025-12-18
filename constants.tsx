@@ -12,8 +12,16 @@ import {
 } from 'lucide-react';
 import { EmotionItem, StepItem, NavLink, Product } from './types';
 
-// Impostiamo il base path corretto per la distribuzione in sottocartella (es. GitHub Pages)
-const BASE_URL = '/enigmabox';
+/**
+ * BASE_URL dinamico fornito da Vite.
+ * Se base è '/', import.meta.env.BASE_URL è '/'.
+ * Se base è '/enigmabox/', import.meta.env.BASE_URL è '/enigmabox/'.
+ * Lo normalizziamo rimuovendo lo slash finale per facilitare la concatenazione.
+ */
+// Fix for Error: Property 'env' does not exist on type 'ImportMeta'
+// We cast import.meta to any to satisfy the TypeScript compiler in environments where Vite types are not automatically picked up.
+const rawBase = (import.meta as any).env?.BASE_URL || '/';
+const BASE_URL = rawBase === '/' ? '' : rawBase.replace(/\/$/, '');
 
 // --- NAVIGAZIONE ---
 export const NAV_LINKS: NavLink[] = [
@@ -54,12 +62,12 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Un tocco di mistero con finiture nere opache.',
     description: 'Per chi ama il design moderno e minimale. La Midnight Mystery si presenta con una finitura soft-touch nera profonda e dettagli lucidi. Ideale per sorprese intriganti e rivelazioni inaspettate.',
     imageColor: 'bg-slate-800 dark:bg-black',
-    features: ['Finitura Soft-Touch', 'QR Code invisibile (UV)', 'Supporto Realtà Aumentata']
+    features: ['Finitura Soft-Touch', 'QR Code invisibile (UV)', 'Supporto Realtor Aumentata']
   }
 ];
 
 // Per link diretti fuori dalla navigazione principale. 
-// Gestisce sia percorsi che iniziano con slash che senza.
+// Se BASE_URL è '', ritorna semplicemente '/path'.
 export const getUrl = (path: string) => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${BASE_URL}${cleanPath}`;
