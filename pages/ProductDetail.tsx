@@ -3,7 +3,7 @@ import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Button } from '../components/ui/Button';
-import { PRODUCTS, getUrl } from '../constants';
+import { PRODUCTS, getUrl, IS_NO_BASE } from '../constants';
 import { Check, ArrowLeft, ShieldCheck, Truck } from 'lucide-react';
 
 interface ProductDetailProps {
@@ -13,12 +13,25 @@ interface ProductDetailProps {
 const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
   const product = PRODUCTS.find(p => p.id === id);
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (IS_NO_BASE) {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('soft-navigate', { detail: path }));
+    }
+  };
+
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-serif mb-4">Prodotto non trovato</h1>
-          <a href={getUrl('/products')} className="underline">Torna al catalogo</a>
+          <a 
+            href={getUrl('/products')} 
+            onClick={(e) => handleLinkClick(e, '/products')}
+            className="underline"
+          >
+            Torna al catalogo
+          </a>
         </div>
       </div>
     );
@@ -29,7 +42,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
       <Navbar />
       
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <a href={getUrl('/products')} className="inline-flex items-center text-sm opacity-60 hover:opacity-100 mb-8 transition-opacity">
+        <a 
+          href={getUrl('/products')} 
+          onClick={(e) => handleLinkClick(e, '/products')}
+          className="inline-flex items-center text-sm opacity-60 hover:opacity-100 mb-8 transition-opacity"
+        >
           <ArrowLeft className="w-4 h-4 mr-2" /> Torna al catalogo
         </a>
 
