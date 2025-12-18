@@ -12,9 +12,8 @@ import {
 } from 'lucide-react';
 import { EmotionItem, StepItem, NavLink, Product } from './types';
 
-// In ambiente sandbox di Google AI Studio, il base path deve essere gestito dinamicamente.
-// Usiamo una stringa vuota per permettere a HashRouter di gestire tutto internamente.
-const BASE_URL = '';
+// Impostiamo il base path corretto per la distribuzione in sottocartella (es. GitHub Pages)
+const BASE_URL = '/enigmabox';
 
 // --- NAVIGAZIONE ---
 export const NAV_LINKS: NavLink[] = [
@@ -59,8 +58,12 @@ export const PRODUCTS: Product[] = [
   }
 ];
 
-// Per link diretti fuori dalla navigazione principale
-export const getUrl = (path: string) => `${BASE_URL}${path.startsWith('/') ? path : '/' + path}`;
+// Per link diretti fuori dalla navigazione principale. 
+// Gestisce sia percorsi che iniziano con slash che senza.
+export const getUrl = (path: string) => {
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${BASE_URL}${cleanPath}`;
+};
 
 // --- HERO SECTION ---
 export const HERO_TEXT = {
