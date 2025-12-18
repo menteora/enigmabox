@@ -23,6 +23,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Create .env file
+        run: |
+          echo "BASE_URL=/enigmabox/" >> .env
+
       - name: Build Vite app
         run: npm run build
 
