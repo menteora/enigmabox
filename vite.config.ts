@@ -4,15 +4,18 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import vike from 'vike/plugin';
 
+// Legge la variabile d'ambiente BASE_URL (es. impostata da CI/CD o .env)
+// Se non esiste, il default è '/' (root)
+const base = process.env.BASE_URL || '/';
+// Vite e Vike richiedono che il base path termini con '/'
+const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+
 export default defineConfig({
-  // Vike richiede che base inizi con '/', 'http://' o 'https://'
-  // Usiamo '/' per la massima compatibilità nell'ambiente di anteprima
-  base: '/enigmabox/',
+  base: normalizedBase,
   plugins: [
     react(), 
     tailwindcss(),
     vike({
-      // Il prerender viene eseguito solo durante la compilazione (npm run build)
       prerender: true 
     })
   ],
@@ -21,7 +24,6 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     hmr: {
-      // Disabilita l'overlay per evitare blocchi visivi nel frame dell'anteprima
       overlay: false
     }
   },
