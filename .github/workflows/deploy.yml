@@ -23,12 +23,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create .env file
-        run: |
-          echo "BASE_URL=/enigmabox/" >> .env
-
       - name: Build Vite app
-        run: npm run build
+        run: BASE_URL=/enigmabox/ npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
