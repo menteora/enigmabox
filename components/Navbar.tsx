@@ -1,15 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun, Box } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from './ui/Button';
 import { useTheme } from '../context/ThemeContext';
-import { NAV_LINKS, NAV_TEXT, getUrl } from '../constants';
+import { NAV_LINKS, NAV_TEXT, getUrl, IS_NO_BASE } from '../constants';
 
 export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -21,14 +18,17 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Chiude il menu mobile al cambio di percorso
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
-
-  const handleNavigation = (e: React.MouseEvent, href: string) => {
-    e.preventDefault();
-    navigate(href);
+  /**
+   * Gestisce il click sui link.
+   * In ambiente Studio (MemoryRouter), impedisce la navigazione standard del browser
+   * e scatena un evento catturato dal NavigationListener in index.tsx.
+   */
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (IS_NO_BASE) {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('soft-navigate', { detail: path }));
+      setIsMobileMenuOpen(false);
+    }
   };
 
   return (
@@ -42,7 +42,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <a 
           href={getUrl('/')} 
-          onClick={(e) => handleNavigation(e, '/')}
+          onClick={(e) => handleLinkClick(e, '/')}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
           <Box className="w-6 h-6" />
@@ -54,8 +54,8 @@ export const Navbar: React.FC = () => {
             <a 
               key={link.label} 
               href={getUrl(link.href)}
-              onClick={(e) => handleNavigation(e, link.href)}
-              className={`text-sm font-medium hover:opacity-70 transition-opacity ${location.pathname === link.href ? 'opacity-100 underline decoration-1 underline-offset-4' : 'opacity-70'}`}
+              onClick={(e) => handleLinkClick(e, link.href.split('#').pop() || '/')}
+              className="text-sm font-medium hover:opacity-70 transition-opacity opacity-70"
             >
               {link.label}
             </a>
@@ -70,7 +70,10 @@ export const Navbar: React.FC = () => {
           >
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          <a href={getUrl('/products')} onClick={(e) => handleNavigation(e, '/products')}>
+          <a 
+            href={getUrl('/products')}
+            onClick={(e) => handleLinkClick(e, '/products')}
+          >
             <Button size="sm">{NAV_TEXT.cta}</Button>
           </a>
         </div>
@@ -91,13 +94,17 @@ export const Navbar: React.FC = () => {
             <a 
               key={link.label} 
               href={getUrl(link.href)}
-              onClick={(e) => handleNavigation(e, link.href)}
-              className={`text-2xl font-serif font-medium py-2 border-b border-black/5 dark:border-white/5 ${location.pathname === link.href ? 'opacity-100' : 'opacity-50'}`}
+              onClick={(e) => handleLinkClick(e, link.href.split('#').pop() || '/')}
+              className="text-2xl font-serif font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               {link.label}
             </a>
           ))}
-          <a href={getUrl('/products')} onClick={(e) => handleNavigation(e, '/products')} className="w-full">
+          <a 
+            href={getUrl('/products')}
+            onClick={(e) => handleLinkClick(e, '/products')}
+            className="w-full"
+          >
             <Button className="w-full mt-4" size="lg">{NAV_TEXT.cta}</Button>
           </a>
         </div>

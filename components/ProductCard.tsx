@@ -2,16 +2,24 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Product } from '../types';
-import { getUrl } from '../constants';
+import { getUrl, IS_NO_BASE } from '../constants';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (IS_NO_BASE) {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('soft-navigate', { detail: path }));
+    }
+  };
+
   return (
     <a 
       href={getUrl(`/products/${product.id}`)}
+      onClick={(e) => handleLinkClick(e, `/products/${product.id}`)}
       className="group flex flex-col bg-white dark:bg-white/5 rounded-2xl overflow-hidden border border-black/5 dark:border-white/5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       <div className={`aspect-square w-full ${product.imageColor} relative flex items-center justify-center overflow-hidden`}>
