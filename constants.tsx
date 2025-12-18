@@ -14,20 +14,20 @@ import { EmotionItem, StepItem, NavLink, Product } from './types';
 
 /**
  * BASE_URL dinamico fornito da Vite.
- * Se base è '/', import.meta.env.BASE_URL è '/'.
- * Se base è '/enigmabox/', import.meta.env.BASE_URL è '/enigmabox/'.
- * Lo normalizziamo rimuovendo lo slash finale per facilitare la concatenazione.
  */
-// Fix for Error: Property 'env' does not exist on type 'ImportMeta'
-// We cast import.meta to any to satisfy the TypeScript compiler in environments where Vite types are not automatically picked up.
 const rawBase = (import.meta as any).env?.BASE_URL || '/';
-const BASE_URL = rawBase === '/' ? '' : rawBase.replace(/\/$/, '');
+export const BASE_URL = rawBase === '/' || rawBase === './' ? '' : rawBase.replace(/\/$/, '');
+
+/**
+ * Determina se l'app è in un ambiente senza base URL (es. AI Studio o sviluppo locale)
+ */
+export const IS_NO_BASE = !BASE_URL;
 
 // --- NAVIGAZIONE ---
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Home', href: `${BASE_URL}/` },
-  { label: 'Le Enigma Box', href: `${BASE_URL}/products` },
-  { label: 'FAQ', href: `${BASE_URL}/faq` },
+  { label: 'Home', href: '/' },
+  { label: 'Le Enigma Box', href: '/products' },
+  { label: 'FAQ', href: '/faq' },
 ];
 
 export const NAV_TEXT = {
@@ -66,11 +66,15 @@ export const PRODUCTS: Product[] = [
   }
 ];
 
-// Per link diretti fuori dalla navigazione principale. 
-// Se BASE_URL è '', ritorna semplicemente '/path'.
+/**
+ * Genera l'URL corretto:
+ * - Se IS_NO_BASE (MemoryRouter): restituisce il path pulito.
+ * - Altrimenti (HashRouter): restituisce il path con il prefisso dell'hash e base_url.
+ */
 export const getUrl = (path: string) => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `${BASE_URL}${cleanPath}`;
+  if (IS_NO_BASE) return cleanPath;
+  return `${BASE_URL}/#${cleanPath}`;
 };
 
 // --- HERO SECTION ---
@@ -162,9 +166,9 @@ export const FOOTER_TEXT = {
     useful: {
       title: "Link Utili",
       links: [
-        { label: "Home", href: `${BASE_URL}/` },
-        { label: "Le Box", href: `${BASE_URL}/products` },
-        { label: "FAQ", href: `${BASE_URL}/faq` },
+        { label: "Home", href: "/" },
+        { label: "Le Box", href: "/products" },
+        { label: "FAQ", href: "/faq" },
       ]
     },
     legal: {
