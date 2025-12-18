@@ -80,7 +80,7 @@ export const getUrl = (path: string) => {
   if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
 
   if (IS_NO_BASE) return cleanPath;
-  return `${BASE_URL}/#${cleanPath}`;
+  return `${BASE_URL}/${cleanPath}`;
 };
 
 // --- HERO SECTION ---
