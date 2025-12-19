@@ -1,1 +1,1 @@
-export default 'products/@id'
+export default '/products/@id'
