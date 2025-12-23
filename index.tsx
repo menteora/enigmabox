@@ -8,6 +8,8 @@ import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
 import FAQ from './pages/FAQ';
 import { IS_NO_BASE } from './constants';
+import { CookieProvider } from './context/CookieContext';
+import { CookieBanner } from './components/CookieBanner';
 
 /**
  * Componente che ascolta l'evento 'soft-navigate' per gestire la navigazione 
@@ -42,23 +44,24 @@ const RouterMonitor = () => {
 };
 
 const App = () => {
-  // Se non c'è BASE_URL (Studio/Local), usiamo MemoryRouter per non sporcare l'URL del browser padre.
-  // Se c'è BASE_URL, usiamo HashRouter per la compatibilità con GitHub Pages.
   const Router = IS_NO_BASE ? MemoryRouter : BrowserRouter;
 
   return (
     <PageShell>
-      <Router>
-        <NavigationListener />
-        <RouterMonitor />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Catalog />} />
-          <Route path="/products/:id" element={<ProductWrapper />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
+      <CookieProvider>
+        <Router>
+          <NavigationListener />
+          <RouterMonitor />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Catalog />} />
+            <Route path="/products/:id" element={<ProductWrapper />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <CookieBanner />
+        </Router>
+      </CookieProvider>
     </PageShell>
   );
 };
